@@ -1,3 +1,7 @@
+- Test Driven Development (projeto fase 2)
+    Fazer os testes unitários em TODAS as classes;
+    Utilizar recursos como Mocks, para manipular os resultados a seu favor;
+
 - Test Driven Development (projeto fase 1)
     Criar testes unitários das principais classes que não possuem nenhuma dependência;
     Validar os tipos das classes no caso de as mesmas implementarem alguma interface;

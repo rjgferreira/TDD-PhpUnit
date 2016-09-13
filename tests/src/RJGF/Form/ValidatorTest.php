@@ -18,7 +18,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      *
      *  Existe valor default apenas para o primeiro parâmetro (quando vasio retorna um input tipo text).
      *  Esperadas duas mensagens de erro de validação.
-     *  Os outros parâmetros não podem ser vasios.
+     *  Os outros dois parâmetros não podem ser vasios.
      */
     public function testEmptyAllParams(){
         $vldt = new Validator(new Request());

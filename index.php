@@ -101,7 +101,6 @@ $dados = array(
                     $form = new \RJGF\Form\Form($validator, $fields, 'form','p','m');
                     $form->openForm();
                     $form->populate($dados);
-                    //$fields->createField('nome','Nome','','t');
                     $form->render();
                     $form->closeForm();
                     ?>

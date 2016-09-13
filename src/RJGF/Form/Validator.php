@@ -31,7 +31,7 @@ class Validator
                 }
                 break;
             default:
-                self::setMessage("O c&oacute;digo do elemento não é reconhecido.");
+                self::setMessage("O c&oacute;digo do elemento n&atilde;o &eacute; reconhecido.");
                 break;
         }
     }

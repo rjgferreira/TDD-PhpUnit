@@ -4,7 +4,6 @@ namespace RJGF;
 use RJGF\Form\Fields;
 use RJGF\Form\Request;
 use RJGF\Form\Validator;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 class FormTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,5 +34,19 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $html = $fields->getHtml();
         // Testa o método Populate (esperado um item)
         $this->assertEquals(1, count($html));
+    }
+
+    public function testOpenForm(){
+        $fields = new Fields();
+        $form = new \RJGF\Form\Form(new Validator(new Request()), $fields);
+        $this->expectOutputString('<form action="" enctype="multipart/form-data" method="POST" class="form">');
+        $form->openForm();
+    }
+
+    public function testCloseForm(){
+        $fields = new Fields();
+        $form = new \RJGF\Form\Form(new Validator(new Request()), $fields);
+        $this->expectOutputString('</form>');
+        $form->closeForm();
     }
 }
