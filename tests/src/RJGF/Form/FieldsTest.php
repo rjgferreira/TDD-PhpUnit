@@ -21,16 +21,27 @@ class FieldsTest extends \PHPUnit_Framework_TestCase
      *
      */
 
+    private $fields;
+
+    // setUp é executado antes de cada teste; funciona como um __construct para cada teste a ser executado
+    public function setUp(){
+        $this->fields = new \RJGF\Form\Fields();
+    }
+
+    // tearDown é executado depois de cada teste
+    public function tearDown(){
+        unset($this->fields);
+    }
+
     public function testVerificaTipoCorretoClasseField()
     {
         // Verifica se a Classe Field implementa a interface FieldGen
-        $this->assertInstanceOf('RJGF\Form\Interfaces\FieldGen', new \RJGF\Form\Fields);
+        $this->assertInstanceOf('RJGF\Form\Interfaces\FieldGen', $this->fields);
     }
 
     public function testFieldParams(){
-        $flds = new Fields();
-        $flds->createField('nome','Nome');
-        $html = implode('',$flds->getHtml());
+        $this->fields->createField('nome','Nome');
+        $html = implode('',$this->fields->getHtml());
         // Testa valor padrão para o parâmetro Type (esperada 1 ocorrência)
         $this->assertEquals(1, substr_count($html, 'type="text"'));
         // Testa valor do parâmetro Placeholder (esperada 1 ocorrência)

@@ -1,9 +1,6 @@
 <?php
 namespace RJGF;
 
-use RJGF\Form\Request;
-use RJGF\Form\Validator;
-
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
     /*
@@ -20,32 +17,42 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
      *  Esperadas duas mensagens de erro de validação.
      *  Os outros dois parâmetros não podem ser vasios.
      */
+    private $request,
+            $validator;
+
+    // setUp é executado antes de cada teste; funciona como um __construct para cada teste a ser executado
+    public function setUp(){
+        $this->request = new \RJGF\Form\Request();
+        $this->validator = new \RJGF\Form\Validator($this->request);
+    }
+    // tearDown é executado depois de cada teste
+    public function tearDown(){
+        unset($this->validator);
+    }
+
     public function testEmptyAllParams(){
-        $vldt = new Validator(new Request());
-        $vldt->validate('','','');
-        $msn = $vldt->getMessage();
+        $this->validator->validate('','','');
+        $msn = $this->validator->getMessage();
         $this->assertEquals(2, count($msn));
 
         /* Testando o Método clearMessages()
          *  - Elimina todas as mensagens do container.
          * Nenhuma mensagem será retornada. Esperado zero.
          */
-        $vldt->clearMessages();
-        $msn = $vldt->getMessage();
+        $this->validator->clearMessages();
+        $msn = $this->validator->getMessage();
         $this->assertEquals(0, count($msn));
     }
     // Esperada uma mensagem de erro de validação: $value é obrigatório.
     public function testEmptyValue(){
-        $vldt = new Validator(new Request());
-        $vldt->validate('t','nome','');
-        $msn = $vldt->getMessage();
+        $this->validator->validate('t','nome','');
+        $msn = $this->validator->getMessage();
         $this->assertEquals(1, count($msn));
     }
     // Esperada uma mensagem de erro de validação: Código de elemento inválido.
     public function testWrongParam(){
-        $vldt = new Validator(new Request());
-        $vldt->validate('w','nome','Sérgio');
-        $msn = $vldt->getMessage();
+        $this->validator->validate('w','nome','Sérgio');
+        $msn = $this->validator->getMessage();
         $this->assertEquals(1, count($msn));
     }
 
